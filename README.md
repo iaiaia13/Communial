@@ -1,2 +1,2 @@
 # Communial
-For everyone easy to looking a working place not just home ;))
+For everyone easy looking a working place not just home ;))
