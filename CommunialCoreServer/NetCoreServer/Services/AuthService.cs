@@ -55,7 +55,6 @@ namespace NetCoreServer.Services
             {
                 user = new User
                 {
-                    GUID = Guid.NewGuid().ToString(),
                     Email = email,
                     UserName = email,
                 };

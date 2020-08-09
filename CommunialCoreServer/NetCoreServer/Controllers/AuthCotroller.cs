@@ -63,10 +63,8 @@ namespace NetCoreServer.Controllers
             if (!usernameUniq)
                 return BadRequest(new { username = "user with this email already exists" });
 
-            var guid = Guid.NewGuid().ToString();
             var user = new User
             {
-                GUID = guid,
                 UserName = model.Username,
                 Email = model.Email,
                 Password = _authService.HashPassword(model.Password)
@@ -86,12 +84,11 @@ namespace NetCoreServer.Controllers
                 var payload = await GoogleJsonWebSignature.ValidateAsync(authData.Token, new GoogleJsonWebSignature.ValidationSettings());
 
                 var user = _userRepository.GetUser(x => x.Email == payload.Email);
+
                 if (user == null)
                 {
-                    var guid = Guid.NewGuid().ToString();
                     user = new User
                     {
-                        GUID = guid,
                         UserName = payload.GivenName,
                         Email = payload.Email,
                         Name = payload.GivenName + " " + payload.FamilyName,
@@ -100,6 +97,9 @@ namespace NetCoreServer.Controllers
                 }
 
                 var token = _authService.GenerateToken(user.GUID);
+                user.Token = token.Token;
+                user.TokenExpirationTime = token.TokenExpirationTime;
+                _userRepository.UpdateUser(user);
 
                 return new OkObjectResult(token);
             }

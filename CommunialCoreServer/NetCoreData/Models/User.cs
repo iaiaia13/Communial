@@ -1,4 +1,5 @@
 ﻿using NetCoreData.ReposInterface;
+using System;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NetCoreData.Models
@@ -19,5 +20,13 @@ namespace NetCoreData.Models
         public string Phone { get; set; }
 
         public string GUID { get; set; }
+
+        public string Token { get; set; }
+
+        public long TokenExpirationTime { get; set; }
+
+        public DateTime CreatedDate { get; set; }
+
+        public DateTime UpdatedDate { get; set; }
     }
 }
