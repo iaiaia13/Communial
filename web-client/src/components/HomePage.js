@@ -1,11 +1,9 @@
 import React, { Component, Fragment } from "react";
 import { Col, Container, Row } from "reactstrap";
 
-import DataTable from "./DataTable";
 import RegistrationModal from "./form/RegistrationModal";
 import { USERS_API_URL, GET_IMAGES } from "../constants";
 import AppHeader from "../components/AppHeader";
-import { authenticationService } from "../services/authService";
 
 class HomePage extends Component {
   state = {

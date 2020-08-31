@@ -1,5 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore.Migrations;
-using MySql.Data.EntityFrameworkCore.Metadata;
+﻿using System;
+using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace NetCoreData.Migrations
 {
@@ -11,14 +11,16 @@ namespace NetCoreData.Migrations
                 name: "User",
                 columns: table => new
                 {
-                    ID = table.Column<int>(nullable: false)
-                        .Annotation("MySQL:ValueGenerationStrategy", MySQLValueGenerationStrategy.IdentityColumn),
+                    ID = table.Column<string>(nullable: false),
                     UserName = table.Column<string>(maxLength: 255, nullable: false),
-                    Password = table.Column<string>(maxLength: 255, nullable: false),
-                    Name = table.Column<string>(maxLength: 45, nullable: false),
+                    Password = table.Column<string>(maxLength: 255, nullable: true),
+                    Name = table.Column<string>(maxLength: 45, nullable: true),
                     Email = table.Column<string>(maxLength: 255, nullable: false),
                     Phone = table.Column<string>(maxLength: 45, nullable: true),
-                    GUID = table.Column<string>(nullable: true)
+                    Token = table.Column<string>(nullable: true),
+                    TokenExpirationTime = table.Column<long>(nullable: false),
+                    CreatedDate = table.Column<DateTime>(nullable: false),
+                    UpdatedDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {

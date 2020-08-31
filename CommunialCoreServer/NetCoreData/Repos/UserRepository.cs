@@ -41,7 +41,7 @@ namespace NetCoreData.Repos
 
         public void InsertUser(User user)
         {
-            user.GUID = Guid.NewGuid().ToString();
+            user.ID = Guid.NewGuid().ToString();
             user.CreatedDate = DateTime.Now;
             this.Add(user);
             this.Commit();

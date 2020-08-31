@@ -4,10 +4,9 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NetCoreData.Models
 {
-    public class User : IEntityBase
+    public class User
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        public int ID { get; set; }
+        public string ID { get; set; }
 
         public string UserName { get; set; }
 
@@ -18,8 +17,6 @@ namespace NetCoreData.Models
         public string Email { get; set; }
 
         public string Phone { get; set; }
-
-        public string GUID { get; set; }
 
         public string Token { get; set; }
 

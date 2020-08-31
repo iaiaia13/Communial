@@ -44,7 +44,9 @@ class AppHeader extends Component {
         .then(r => {
           r.json().then(user => {
             localStorage.setItem("authData", JSON.stringify(user));
-            
+
+            const pathname = "/";
+            this.props.history.push(pathname);
           });
         })
   }

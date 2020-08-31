@@ -4,7 +4,7 @@ using System.Linq.Expressions;
 
 namespace NetCoreData.ReposInterface
 {
-    public interface IEntityBaseRepository<T> where T : class, IEntityBase, new()
+    public interface IEntityBaseRepository<T> where T : class, new()
     {
         IEnumerable<T> AllIncluding(params Expression<Func<T, object>>[] includeProperties);
 
@@ -12,7 +12,7 @@ namespace NetCoreData.ReposInterface
 
         int Count();
 
-        T GetSingle(int id);
+        //T GetSingle(int id);
 
         T GetSingle(Expression<Func<T, bool>> predicate);
 

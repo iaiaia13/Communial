@@ -8,7 +8,7 @@ using System.Linq.Expressions;
 
 namespace NetCoreData.Repos
 {
-    public class EntityBaseRepository<T> : IEntityBaseRepository<T> where T : class, IEntityBase, new()
+    public class EntityBaseRepository<T> : IEntityBaseRepository<T> where T : class, new()
     {
         private DataContext _context;
 
@@ -37,10 +37,10 @@ namespace NetCoreData.Repos
             return query.AsEnumerable();
         }
 
-        public T GetSingle(int id)
-        {
-            return _context.Set<T>().FirstOrDefault(x => x.ID == id);
-        }
+        //public T GetSingle(int id)
+        //{
+        //    return _context.Set<T>().FirstOrDefault(x => x.ID == id);
+        //}
 
         public T GetSingle(Expression<Func<T, bool>> predicate)
         {

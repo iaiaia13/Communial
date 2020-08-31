@@ -45,7 +45,7 @@ namespace NetCoreServer.Controllers
                 return BadRequest(new { password = "invalid password" });
             }
 
-            var authData = _authService.GenerateToken(user.GUID);
+            var authData = _authService.GenerateToken(user.ID);
             return new OkObjectResult(authData);
         }
 
@@ -71,7 +71,7 @@ namespace NetCoreServer.Controllers
             };
             _userRepository.InsertUser(user);
 
-            var authData = _authService.GenerateToken(user.GUID);
+            var authData = _authService.GenerateToken(user.ID);
             return new OkObjectResult(authData);
         }
 
@@ -96,9 +96,10 @@ namespace NetCoreServer.Controllers
                     _userRepository.InsertUser(user);
                 }
 
-                var token = _authService.GenerateToken(user.GUID);
+                var token = _authService.GenerateToken(user.ID);
                 user.Token = token.Token;
                 user.TokenExpirationTime = token.TokenExpirationTime;
+
                 _userRepository.UpdateUser(user);
 
                 return new OkObjectResult(token);

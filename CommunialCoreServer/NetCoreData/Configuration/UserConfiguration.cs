@@ -18,16 +18,14 @@ namespace NetCoreData.Configurations
                 .IsRequired();
 
             builder.Property(t => t.Password)
-                .HasMaxLength(255)
-                .IsRequired();
+                .HasMaxLength(255);
 
             builder.Property(t => t.Email)
                 .HasMaxLength(255)
                 .IsRequired();
 
             builder.Property(t => t.Name)
-                .HasMaxLength(45)
-                .IsRequired();
+                .HasMaxLength(45);
 
             builder.Property(t => t.Phone)
              .HasMaxLength(45);

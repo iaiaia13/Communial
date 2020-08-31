@@ -19,9 +19,8 @@ namespace NetCoreData.Migrations
 
             modelBuilder.Entity("NetCoreData.Models.User", b =>
                 {
-                    b.Property<int>("ID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
+                    b.Property<string>("ID")
+                        .HasColumnType("varchar(767)");
 
                     b.Property<DateTime>("CreatedDate")
                         .HasColumnType("datetime");
@@ -31,16 +30,11 @@ namespace NetCoreData.Migrations
                         .HasColumnType("varchar(255)")
                         .HasMaxLength(255);
 
-                    b.Property<string>("GUID")
-                        .HasColumnType("text");
-
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("varchar(45)")
                         .HasMaxLength(45);
 
                     b.Property<string>("Password")
-                        .IsRequired()
                         .HasColumnType("varchar(255)")
                         .HasMaxLength(255);
 
