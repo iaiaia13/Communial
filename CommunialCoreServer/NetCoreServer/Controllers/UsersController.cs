@@ -15,9 +15,9 @@ namespace NetCoreServer.Controllers
      */
     public class UsersController : ControllerBase
     {
-        private IUserRepository _userRepository;
+        private IUsersRepository _userRepository;
 
-        public UsersController(IUserRepository userRepository)
+        public UsersController(IUsersRepository userRepository)
         {
             this._userRepository = userRepository;
         }
@@ -45,7 +45,7 @@ namespace NetCoreServer.Controllers
         // POST api/users
         //[Authorize]
         [HttpPost]
-        public IActionResult Post([FromBody] User body)
+        public IActionResult Post([FromBody] Users body)
         {
             _userRepository.InsertUser(body);
             var user = _userRepository.GetUser(body.UserName);
@@ -58,9 +58,9 @@ namespace NetCoreServer.Controllers
         // PUT api/users/5
         [Authorize]
         [HttpPut("{id}")]
-        public IActionResult PutOne(string username, [FromBody] User body)
+        public IActionResult PutOne(string username, [FromBody] Users body)
         {
-            User user = _userRepository.GetUser(username);
+            Users user = _userRepository.GetUser(username);
             if (user is null)
                 return new NotFoundResult();
             body.UserName = username;

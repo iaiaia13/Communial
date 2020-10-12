@@ -26,8 +26,10 @@ namespace NetCoreServer
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddScoped<IUserRepository, UserRepository>();
-            services.AddScoped<IFoodRepository, FoodRepository>();
+            services.AddScoped<IUsersRepository, UsersRepository>();
+            services.AddScoped<IOfficeRepository, OfficeRepository>();
+
+            RegiterServices.AddServices(services);
 
             services.AddCors(o => o.AddPolicy("ReactPolicy", builder =>
             {

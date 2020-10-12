@@ -11,9 +11,11 @@ namespace NetCoreData
             Database.Migrate();
         }
 
-        public DbSet<User> User { get; set; }
+        public DbSet<Users> User { get; set; }
 
-        //public DbSet<Food> Food { get; set; }
+        public DbSet<Office> Office { get; set; }
+
+        public DbSet<OfficeRenting> OfficeRenting { get; set; }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

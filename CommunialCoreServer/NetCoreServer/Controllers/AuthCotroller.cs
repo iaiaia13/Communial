@@ -18,9 +18,9 @@ namespace NetCoreServer.Controllers
     public class AuthController : ControllerBase
     {
         private IAuthService _authService;
-        private IUserRepository _userRepository;
+        private IUsersRepository _userRepository;
 
-        public AuthController(IAuthService authService, IUserRepository userRepository)
+        public AuthController(IAuthService authService, IUsersRepository userRepository)
         {
             this._authService = authService;
             this._userRepository = userRepository;
@@ -63,7 +63,7 @@ namespace NetCoreServer.Controllers
             if (!usernameUniq)
                 return BadRequest(new { username = "user with this email already exists" });
 
-            var user = new User
+            var user = new Users
             {
                 UserName = model.Username,
                 Email = model.Email,
@@ -87,7 +87,7 @@ namespace NetCoreServer.Controllers
 
                 if (user == null)
                 {
-                    user = new User
+                    user = new Users
                     {
                         UserName = payload.GivenName,
                         Email = payload.Email,

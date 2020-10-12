@@ -1,44 +1,49 @@
 import React, { Component, Fragment } from "react";
-import { Router, Route } from "react-router-dom";
-import { history } from "./helpers/history";
-import AppFooter from "./components/AppFooter";
-import HomePage from "./components/HomePage";
-import LoginPage from "./components/login/LoginPage";
-import { authenticationService } from "./services/authService";
+import HomePage from "./pages/HomePage";
+import { Route, Switch } from "react-router-dom";
+import { ListOffice } from "./components/office/ListOffice";
+import { Navigation } from "./components/nav/Navigation";
+import { Container } from "./components/Container";
+import HomeSearch from "./components/homesearch/HomeSearch";
+import { useForm } from "react-hook-form";
 
-class App extends Component {
-  logout() {
-    authenticationService.logout();
-    history.push("/");
-    window.location.reload();
-  }
-  render() {
-    return (
+import OfficeContextProvider from "./app/context/officeContext";
+
+export default function App() {
+  // Prevent page reload, clear input, set URL and push history on submit
+  // handleSubmit = (e, history, searchInput) => {
+  //   e.preventDefault();
+  //   e.currentTarget.reset();
+  //   let url = `/search/${searchInput}`;
+  //   history.push(url);
+  // };
+
+  return (
+    <OfficeContextProvider>
       <Fragment>
-        <Router forceRefresh={true} history={history}>
+        <Navigation />
+        <Route
+          render={props => (
+            <HomeSearch
+            // handleSubmit={this.handleSubmit}
+            // history={props.history}
+            />
+          )}
+        />
+        <Route exact path="/" component={HomePage} />
+        <Switch>
           <Route
-            exact
-            path="/"
-            render={(props) => <HomePage {...props} logout={this.logout} />}
+            path="/communal"
+            render={() => <ListOffice searchTerm="beach" />}
           />
           <Route
-            exact
-            path="/login"
-            render={(props) => (
-              <LoginPage {...props} isNew={false} />
+            path="/search/:searchInput"
+            render={props => (
+              <ListOffice searchTerm={props.match.params.searchInput} />
             )}
           />
-          <Route
-            exact
-            path="/register"
-            render={(props) => (
-              <LoginPage {...props} isNew={true} />
-            )}
-          />
-        </Router>
-        <AppFooter />
+        </Switch>
       </Fragment>
-    );
-  }
+    </OfficeContextProvider>
+  );
 }
-export default App;

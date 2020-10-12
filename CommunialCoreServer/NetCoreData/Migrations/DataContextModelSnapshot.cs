@@ -14,10 +14,82 @@ namespace NetCoreData.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "3.1.6")
+                .HasAnnotation("ProductVersion", "3.1.8")
                 .HasAnnotation("Relational:MaxIdentifierLength", 64);
 
-            modelBuilder.Entity("NetCoreData.Models.User", b =>
+            modelBuilder.Entity("NetCoreData.Models.Office", b =>
+                {
+                    b.Property<string>("ID")
+                        .HasColumnType("varchar(767)");
+
+                    b.Property<string>("Address")
+                        .HasColumnType("text");
+
+                    b.Property<int>("Capacity")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Image")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("varchar(255)")
+                        .HasMaxLength(255);
+
+                    b.Property<double>("PricePerDay")
+                        .HasColumnType("double");
+
+                    b.Property<double>("PricePerMonth")
+                        .HasColumnType("double");
+
+                    b.Property<double>("PricePerQuarter")
+                        .HasColumnType("double");
+
+                    b.Property<double>("PricePerYear")
+                        .HasColumnType("double");
+
+                    b.Property<double>("Start")
+                        .HasColumnType("double");
+
+                    b.Property<string>("Type")
+                        .HasColumnType("text");
+
+                    b.HasKey("ID");
+
+                    b.ToTable("Office");
+                });
+
+            modelBuilder.Entity("NetCoreData.Models.OfficeRenting", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    b.Property<DateTime>("FromDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<string>("OfficeID")
+                        .HasColumnType("varchar(767)");
+
+                    b.Property<double>("Price")
+                        .HasColumnType("double");
+
+                    b.Property<DateTime>("ToDate")
+                        .HasColumnType("datetime");
+
+                    b.Property<int>("Type")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("OfficeID");
+
+                    b.ToTable("OfficeRenting");
+                });
+
+            modelBuilder.Entity("NetCoreData.Models.Users", b =>
                 {
                     b.Property<string>("ID")
                         .HasColumnType("varchar(767)");
@@ -62,6 +134,13 @@ namespace NetCoreData.Migrations
                         .IsUnique();
 
                     b.ToTable("User");
+                });
+
+            modelBuilder.Entity("NetCoreData.Models.OfficeRenting", b =>
+                {
+                    b.HasOne("NetCoreData.Models.Office", "Office")
+                        .WithMany("OfficeRenting")
+                        .HasForeignKey("OfficeID");
                 });
 #pragma warning restore 612, 618
         }

@@ -48,12 +48,12 @@ namespace NetCoreServer.Services
             };
         }
 
-        public User GetAuthData(IUserRepository userRepository, string email)
+        public Users GetAuthData(IUsersRepository userRepository, string email)
         {
             var user = userRepository.GetUser(x => x.Email == email);
             if (user == null)
             {
-                user = new User
+                user = new Users
                 {
                     Email = email,
                     UserName = email,

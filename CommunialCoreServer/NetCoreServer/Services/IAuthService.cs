@@ -8,7 +8,7 @@ namespace NetCoreServer.Services
     {
         public AuthData GenerateToken(string id);
 
-        public User GetAuthData(IUserRepository userRepository, string email);
+        public Users GetAuthData(IUsersRepository userRepository, string email);
 
         public string HashPassword(string password);
 
